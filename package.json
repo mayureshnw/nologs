@@ -4,7 +4,8 @@
   "description": "A simple script that will remove logs in all js files in the directory. + a github webhook that will do it for you",
   "main": "nologs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npm i -g jscodeshift"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/Mnw2212/nologs#readme",
   "dependencies": {
-    "cli": "^0.11.2"
+    "cli": "^0.11.2",
+    "jscodeshift": "^0.3.22"
   }
 }
