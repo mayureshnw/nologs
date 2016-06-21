@@ -1,14 +1,19 @@
-export default (fileInfo, api) => {
-  const j = api.jscodeshift;
+var fs = require('fs');
 
-  return j(fileInfo.source)
-    .find(j.CallExpression, {
-        callee: {
-          type: 'MemberExpression',
-          object: { type: 'Identifier', name: 'console' },
-        },
-      }
-    )
-    .remove()
-    .toSource()
-};
+var walk = function(dir) {
+    var results = []
+    var list = fs.readdirSync(dir)
+    list.forEach(function(file) {
+        var ext = file.split('.');
+        var isJs = ext[ext.length - 1] === "js";
+        if (isJs) {
+            file = dir + '/' + file
+            var stat = fs.statSync(file)
+            if (stat && stat.isDirectory()) results = results.concat(walk(file))
+            else results.push(file)
+        }
+    })
+    return results
+}
+
+// console.log(__dirname);
