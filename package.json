@@ -1,0 +1,20 @@
+{
+  "name": "nologs",
+  "version": "1.0.0",
+  "description": "A simple script that will remove logs in all js files in the directory. + a github webhook that will do it for you",
+  "main": "nologs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mnw2212/nologs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mnw2212/nologs/issues"
+  },
+  "homepage": "https://github.com/Mnw2212/nologs#readme"
+}

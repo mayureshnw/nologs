@@ -10,5 +10,5 @@ export default (fileInfo, api) => {
       }
     )
     .remove()
-    .toSource();
+    .toSource()
 };
