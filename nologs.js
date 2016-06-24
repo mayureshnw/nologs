@@ -21,7 +21,7 @@ const walk = (dir, option) => {
 }
 
 const removeFromDir = (dir, option) => {
-    overwrite = (option) ? '' : '-d';
+    overwrite = (option) ? '' : '-d -p';
     var fileList = walk(dir);
     fileList.forEach((file) => {
         exec(`jscodeshift -t transform.js ${file} ${overwrite}`, function(err, stdout, stderr) {
@@ -32,7 +32,7 @@ const removeFromDir = (dir, option) => {
 
 
 const removeFromFile = (file, option) => {
-    overwrite = (option) ? '' : '-d';
+    overwrite = (option) ? '' : '-d -p';
     exec(`jscodeshift -t transform.js ${file} ${overwrite}`, function(err, stdout, stderr) {
       (err) ? console.error(stderr) : console.info(stdout);
     });
