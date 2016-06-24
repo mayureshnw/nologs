@@ -1,8 +1,12 @@
 {
   "name": "nologs",
   "version": "1.0.0",
-  "description": "A simple script that will remove logs in all js files in the directory. + a github webhook that will do it for you",
+  "description": "Remove logs from Javascript files easily",
   "main": "nologs.js",
+  "dependencies": {
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "preinstall": "npm i -g jscodeshift"
@@ -12,14 +16,16 @@
     "url": "git+https://github.com/Mnw2212/nologs.git"
   },
   "bin" : { "nologs" : "./nologs.js" },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "console",
+    "logs",
+    "remove",
+    "codemods"
+  ],
+  "author": "Mayuresh Waykole",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Mnw2212/nologs/issues"
   },
-  "homepage": "https://github.com/Mnw2212/nologs#readme",
-  "dependencies": {
-    "commander": "^2.9.0"
-  }
+  "homepage": "https://github.com/Mnw2212/nologs#readme"
 }
