@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/Mnw2212/nologs#readme",
   "dependencies": {
-    "commander": "^2.9.0",
-    "jscodeshift": "^0.3.22"
+    "commander": "^2.9.0"
   }
 }

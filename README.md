@@ -1,15 +1,37 @@
 # nologs
 A simple script that will remove logs in all js files in the directory. + a github webhook that will do it for you
 
+## Installation
+`npm install -g nologs`
+
 ## Usage
-If you want the source to be rewritten
+
+General Usage
 ```
-$ jscodeshift -t transform.js test.js -p
+Usage: nologs [options] [command]
+
+
+  Commands:
+
+    file [options] [path]  Give the directory to remove console.
+    dir [options] [dir]    Give the directory to remove console.log
+    here [options]         takes the current directory to remove logs
+
+  Options:
+
+    -h, --help        Output usage information
+    -V, --version     Output the version number
+    -o, --overwrite   Original files will be overwritten with output
+    -i, --ignore      Ignore files from gitignore
 ```
 
-If you would like to keep the source intact
+To remove logs from file
 ```
-$ jscodeshift -t transform.js test.js -p -d
+$ nologs file filename.js
 ```
 
-test.js is javascript file that you want to remove the logs from
+To remove logs from directory
+```
+$ nologs dir /path/to/dir
+```
+Incase removing logs from a git repository, use the ` -i ` flag to ignore files or folders according to .gitignore

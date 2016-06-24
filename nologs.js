@@ -15,10 +15,9 @@ const removeFromFile = (file, option, ignore) => {
 program
     .command('file [path]')
     .option('-o, --overwrite', 'Original files will be overwritten with output')
-    .option('-i, --ignore', 'Ignore files from gitignore')
     .description('Give the directory to remove console.')
     .action(function(path, options) {
-        removeFromFile(path, options.overwrite, options.ignore);
+        removeFromFile(path, options.overwrite, false);
     })
 
 
