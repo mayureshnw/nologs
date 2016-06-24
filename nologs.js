@@ -4,19 +4,10 @@ const fs = require('fs');
 const program = require('commander');
 const exec = require('child_process').exec;
 
-const removeFromDir = (dir, option, ignore) => {
-    const overwrite = (option) ? '' : '-d -p';
-    const ign = (ignore) ? '' : '--ignore-config .gitignore';
-    exec(`jscodeshift -t transform.js ${dir} ${overwrite} ${ignore}`, function(err, stdout, stderr) {
-        (err) ? console.error(stderr): console.info(stdout);
-    });
-}
-
-
 const removeFromFile = (file, option, ignore) => {
     const overwrite = (option) ? '' : '-d -p';
-    const ign = (ignore) ? '' : '--ignore-config .gitignore';
-    exec(`jscodeshift -t transform.js ${file} ${overwrite} ${ignore}`, function(err, stdout, stderr) {
+    const ign = (ignore) ? '--ignore-config .gitignore' : '';
+    exec(`jscodeshift -t transform.js ${file} ${overwrite} ${ign}`, function(err, stdout, stderr) {
         (err) ? console.error(stderr): console.info(stdout);
     });
 }
@@ -37,7 +28,7 @@ program
     .option('-i, --ignore', 'Ignore files from gitignore')
     .description('Give the directory to remove console.log')
     .action(function(dir, options) {
-        removeFromDir(dir, options.overwrite, options.ignore);
+        removeFromFile(dir, options.overwrite, options.ignore);
     });
 
 program
@@ -46,8 +37,7 @@ program
     .option('-i, --ignore', 'Ignore files from gitignore')
     .description('takes the current directory to remove logs')
     .action(function(options) {
-        console.log(__dirname);
-        removeFromDir(__dirname, options.overwrite, options.ignore);
+        removeFromFile(__dirname, options.overwrite, options.ignore);
     });
 
 program
