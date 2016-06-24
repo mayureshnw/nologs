@@ -23,7 +23,7 @@
     "codemods"
   ],
   "author": "Mayuresh Waykole",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Mnw2212/nologs/issues"
   },
