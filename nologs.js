@@ -5,7 +5,6 @@ const program = require('commander');
 const exec = require('child_process').exec;
 
 const walk = (dir, option) => {
-    console.log(option);
     var results = []
     var list = fs.readdirSync(dir)
     list.forEach(function(file) {
@@ -22,31 +21,30 @@ const walk = (dir, option) => {
 }
 
 const removeFromDir = (dir, option) => {
-    overwrite = (option) ? '-d' : '';
+    overwrite = (option) ? '' : '-d';
     var fileList = walk(dir);
     fileList.forEach((file) => {
         exec(`jscodeshift -t transform.js ${file} ${overwrite}`, function(err, stdout, stderr) {
-            (err) ? console.log(stderr): console.log(stdout);;
+          (err) ? console.error(stderr) : console.info(stdout);
         });
     });
 }
 
 
 const removeFromFile = (file, option) => {
-    overwrite = (option) ? '-d' : '';
+    overwrite = (option) ? '' : '-d';
     exec(`jscodeshift -t transform.js ${file} ${overwrite}`, function(err, stdout, stderr) {
-        (err) ? console.log(stderr): console.log(stdout);;
+      (err) ? console.error(stderr) : console.info(stdout);
     });
 }
 
 program
     .command('file [path]')
     .option('-o, --overwrite', 'Original files will be overwritten with output')
-    .description('Give the directory to remove console.log')
+    .description('Give the directory to remove console.')
     .action(function(dir, options) {
-        console.log(options);
-        removeFromFile(file, options.overwrite)
-    })
+    removeFromFile(file, options.overwrite)
+})
 
 
 program
@@ -62,7 +60,6 @@ program
     .option('-o, --overwrite', 'Original files will be overwritten with output')
     .description('takes the current directory to remove logs')
     .action(function(options) {
-        // console.log(options.overwrite);
         removeFromDir(__dirname, options.overwrite);
     });
 
