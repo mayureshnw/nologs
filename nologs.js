@@ -1,9 +1,11 @@
 #!/usr/bin/env node
+
 const fs = require('fs');
 const program = require('commander');
 const exec = require('child_process').exec;
 
-const walk = (dir) => {
+const walk = (dir, option) => {
+    console.log(option);
     var results = []
     var list = fs.readdirSync(dir)
     list.forEach(function(file) {
@@ -19,44 +21,53 @@ const walk = (dir) => {
     return results
 }
 
-const removeFromDir = (dir) => {
+const removeFromDir = (dir, option) => {
+    overwrite = (option) ? '-d' : '';
     var fileList = walk(dir);
     fileList.forEach((file) => {
-        exec(`jscodeshift -t transform.js ${file} -p -d`, function(err, stdout, stderr) {
+        exec(`jscodeshift -t transform.js ${file} ${overwrite}`, function(err, stdout, stderr) {
             (err) ? console.log(stderr): console.log(stdout);;
         });
     });
 }
 
 
-const removeFromFile = (file) => {
-    exec(`jscodeshift -t transform.js ${file} -p -d`, function(err, stdout, stderr) {
+const removeFromFile = (file, option) => {
+    overwrite = (option) ? '-d' : '';
+    exec(`jscodeshift -t transform.js ${file} ${overwrite}`, function(err, stdout, stderr) {
         (err) ? console.log(stderr): console.log(stdout);;
     });
 }
-program
-    .command('dir [dir]')
-    .description('Give the directory to remove console.log')
-    .action(function(dir) {
-        removeFromDir(dir);
-    });
-
-program
-    .command('current')
-    .description('takes the current directory to remove logs')
-    .action(function() {
-      console.log(__dirname);
-        removeFromDir(__dirname);
-    });
 
 program
     .command('file [path]')
+    .option('-o, --overwrite', 'Original files will be overwritten with output')
     .description('Give the directory to remove console.log')
-    .action(function(path) {
-        removeFromFile();
+    .action(function(dir, options) {
+        console.log(options);
+        removeFromFile(file, options.overwrite)
+    })
+
+
+program
+    .command('dir [dir]')
+    .option('-o, --overwrite', 'Original files will be overwritten with output')
+    .description('Give the directory to remove console.log')
+    .action(function(dir) {
+        removeFromDir(dir, options.overwrite);
+    });
+
+program
+    .command('here')
+    .option('-o, --overwrite', 'Original files will be overwritten with output')
+    .description('takes the current directory to remove logs')
+    .action(function(options) {
+        // console.log(options.overwrite);
+        removeFromDir(__dirname, options.overwrite);
     });
 
 program
     .version('0.0.1')
-    .option('-o, --ovr', 'Original files will be overwritten with output')
     .parse(process.argv);
+
+if (!program.args.length) program.help();
