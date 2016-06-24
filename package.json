@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/Mnw2212/nologs.git"
   },
+  "bin" : { "nologs" : "./nologs.js" },
   "keywords": [],
   "author": "",
   "license": "ISC",
